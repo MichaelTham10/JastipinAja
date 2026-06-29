@@ -1,0 +1,75 @@
+## .NET / Visual Studio
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+build/
+bld/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio temporary & user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Build / restore artifacts
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.binlog
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Rider / JetBrains (kalau suatu saat pakai)
+.idea/
+*.sln.iml
+
+# VS Code (opsional — hapus kalau mau commit setting tim)
+.vscode/
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Project-specific
+
+# Local config & secrets — JANGAN commit
+appsettings.Development.json
+appsettings.Local.json
+*.secrets.json
+secrets.json
+
+# SQLite (kalau nanti pakai SQLite lokal)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite

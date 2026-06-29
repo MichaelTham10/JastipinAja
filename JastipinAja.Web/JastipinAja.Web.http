@@ -1,0 +1,6 @@
+@JastipinAja.Web_HostAddress = http://localhost:5149
+
+GET {{JastipinAja.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

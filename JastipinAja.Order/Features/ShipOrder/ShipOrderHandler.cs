@@ -1,4 +1,5 @@
-﻿using JastipinAja.Order.Features.AcceptOrder;
+﻿using JastipinAja.BuildingBlocks.Exceptions;
+using JastipinAja.Order.Features.AcceptOrder;
 using JastipinAja.Order.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;

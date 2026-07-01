@@ -1,4 +1,5 @@
-﻿using JastipinAja.Order.Persistence;
+﻿using JastipinAja.BuildingBlocks.Exceptions;
+using JastipinAja.Order.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

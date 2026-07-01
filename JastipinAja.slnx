@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="JastipinAja.BuildingBlocks/JastipinAja.BuildingBlocks.csproj" Id="9fe3d048-cd69-4970-a7d8-0c9d1a1a73e6" />
   <Project Path="JastipinAja.Order.Contracts/JastipinAja.Order.Contracts.csproj" />
+  <Project Path="JastipinAja.Order.Tests/JastipinAja.Order.Tests.csproj" Id="6f673624-1cdc-4221-afda-c4adf8426fa8" />
   <Project Path="JastipinAja.Order/JastipinAja.Order.csproj" />
   <Project Path="JastipinAja.Payment.Contracts/JastipinAja.Payment.Contracts.csproj" />
   <Project Path="JastipinAja.Payment/JastipinAja.Payment.csproj" />

@@ -1,15 +1,16 @@
-﻿using JastipinAja.Order.Persistence;
+﻿using JastipinAja.Order.Features.AcceptOrder;
+using JastipinAja.Order.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JastipinAja.Order.Features.AcceptOrder
+namespace JastipinAja.Order.Features.ShipOrder
 {
-    internal sealed class AcceptOrderHandler
+    internal sealed class ShipOrderHandler
     {
         private readonly OrderDbContext _db;
-        public AcceptOrderHandler(OrderDbContext db) => _db = db;
+        public ShipOrderHandler(OrderDbContext db) => _db = db;
 
         public async Task Handle(AcceptOrderCommand command, CancellationToken ct)
         {
@@ -17,7 +18,7 @@ namespace JastipinAja.Order.Features.AcceptOrder
                 .FirstOrDefaultAsync(o => o.PublicId == command.PublicId, ct)
                 ?? throw new NotFoundException("Order tidak ditemukan.");
 
-            order.Accept();  // kalau status bukan Requested, entity sendiri yang menolak
+            order.Ship();  // kalau status bukan Requested, entity sendiri yang menolak
             await _db.SaveChangesAsync(ct);
         }
     }

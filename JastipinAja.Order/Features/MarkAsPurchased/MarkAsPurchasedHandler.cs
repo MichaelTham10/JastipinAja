@@ -4,20 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JastipinAja.Order.Features.AcceptOrder
+namespace JastipinAja.Order.Features.MarkAsPurchased
 {
-    internal sealed class AcceptOrderHandler
+    internal sealed class MarkAsPurchasedHandler
     {
         private readonly OrderDbContext _db;
-        public AcceptOrderHandler(OrderDbContext db) => _db = db;
+        public MarkAsPurchasedHandler(OrderDbContext db) => _db = db;
 
-        public async Task Handle(AcceptOrderCommand command, CancellationToken ct)
+        public async Task Handle(MarkAsPurchasedCommand command, CancellationToken ct)
         {
             var order = await _db.Orders
                 .FirstOrDefaultAsync(o => o.PublicId == command.PublicId, ct)
                 ?? throw new NotFoundException("Order tidak ditemukan.");
 
-            order.Accept();  // kalau status bukan Requested, entity sendiri yang menolak
+            order.MarkAsPurchased();   // <- satu-satunya baris yang beda
             await _db.SaveChangesAsync(ct);
         }
     }

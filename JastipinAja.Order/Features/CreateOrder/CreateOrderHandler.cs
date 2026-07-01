@@ -1,9 +1,10 @@
-﻿using System;
+﻿using FluentValidation;
+using JastipinAja.BuildingBlocks.Generic;
+using JastipinAja.Order.Domain;
+using JastipinAja.Order.Persistence;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using JastipinAja.BuildingBlocks.Generic;
-using JastipinAja.Order.Persistence;
-using JastipinAja.Order.Domain;
 
 namespace JastipinAja.Order.Features.CreateOrder
 {
@@ -11,15 +12,20 @@ namespace JastipinAja.Order.Features.CreateOrder
     {
         private readonly OrderDbContext _db;
         private readonly RunningNumberGenerator<OrderDbContext> _numbers;
+        private readonly IValidator<CreateOrderCommand> _validator;
 
-        public CreateOrderHandler(OrderDbContext db, RunningNumberGenerator<OrderDbContext> numbers)
+
+        public CreateOrderHandler(OrderDbContext db, RunningNumberGenerator<OrderDbContext> numbers, IValidator<CreateOrderCommand> validator)
         {
             _db = db;
             _numbers = numbers;
+            _validator = validator;
         }
 
         public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken ct)
         {
+            await _validator.ValidateAndThrowAsync(command, ct);  // gagal → ValidationException → 400
+
             var orderNo = await _numbers.NextAsync(
                 new RunningNumberRequest("ordering.OrderNoSeq", "ORD"), ct);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JastipinAja.BuildingBlocks.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,11 +21,11 @@ namespace JastipinAja.Order.Domain
         public Order(Guid customerId, string orderNo, string itemDescription, decimal price)
         {
             if (customerId == Guid.Empty)
-                throw new ArgumentException("CustomerId wajib diisi.");
+                throw new DomainException("CustomerId wajib diisi.");
             if (string.IsNullOrWhiteSpace(itemDescription))
-                throw new ArgumentException("Deskripsi barang wajib diisi.");
+                throw new DomainException("Deskripsi barang wajib diisi.");
             if (price <= 0)
-                throw new ArgumentException("Harga harus lebih dari nol.");
+                throw new DomainException("Harga harus lebih dari nol.");
             PublicId = Guid.NewGuid();
             OrderNo = orderNo;
             CustomerId = customerId;
@@ -62,7 +63,7 @@ namespace JastipinAja.Order.Domain
         private void EnsureStatusIn(params OrderStatus[] allowed)
         {
             if (!allowed.Contains(Status))
-                throw new InvalidOperationException($"Transisi tidak valid dari status {Status}.");
+                throw new DomainException($"Transisi tidak valid dari status {Status}.");
         }
     }
 }

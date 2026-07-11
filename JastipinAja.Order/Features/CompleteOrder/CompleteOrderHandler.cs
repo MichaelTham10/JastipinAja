@@ -13,7 +13,7 @@ namespace JastipinAja.Order.Features.CompleteOrder
         private readonly OrderDbContext _db;
         public CompleteOrderHandler(OrderDbContext db) => _db = db;
 
-        public async Task Handle(MarkAsPaidCommand command, CancellationToken ct)
+        public async Task Handle(CompleteOrderCommand command, CancellationToken ct)
         {
             var order = await _db.Orders
                 .FirstOrDefaultAsync(o => o.PublicId == command.PublicId, ct)

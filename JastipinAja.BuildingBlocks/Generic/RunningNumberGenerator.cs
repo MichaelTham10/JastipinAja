@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace JastipinAja.BuildingBlocks.Generic
 {
@@ -19,12 +20,11 @@ namespace JastipinAja.BuildingBlocks.Generic
 
         public async Task<string> NextAsync(RunningNumberRequest r, CancellationToken ct)
         {
-            // benteng: nama sequence hanya boleh huruf, angka, titik, underscore
-            if (!System.Text.RegularExpressions.Regex.IsMatch(r.SequenceName, @"^[A-Za-z0-9_.]+$"))
+            if (!Regex.IsMatch(r.SequenceName, @"^[A-Za-z0-9_.""]+$"))
                 throw new ArgumentException($"Nama sequence tidak valid: {r.SequenceName}");
 
             var seq = await _db.Database
-                .SqlQueryRaw<long>($"SELECT NEXT VALUE FOR {r.SequenceName} AS Value")
+                .SqlQueryRaw<long>($"SELECT nextval('{r.SequenceName}') AS \"Value\"")
                 .FirstAsync(ct);
 
             var year = r.IncludeYear ? $"-{DateTime.UtcNow:yyyy}" : "";

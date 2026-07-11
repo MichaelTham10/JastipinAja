@@ -13,7 +13,7 @@ namespace JastipinAja.Order.Features.ShipOrder
         private readonly OrderDbContext _db;
         public ShipOrderHandler(OrderDbContext db) => _db = db;
 
-        public async Task Handle(AcceptOrderCommand command, CancellationToken ct)
+        public async Task Handle(ShipOrderCommand command, CancellationToken ct)
         {
             var order = await _db.Orders
                 .FirstOrDefaultAsync(o => o.PublicId == command.PublicId, ct)

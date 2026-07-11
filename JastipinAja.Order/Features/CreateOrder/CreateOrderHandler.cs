@@ -27,7 +27,7 @@ namespace JastipinAja.Order.Features.CreateOrder
             await _validator.ValidateAndThrowAsync(command, ct);  // gagal → ValidationException → 400
 
             var orderNo = await _numbers.NextAsync(
-                new RunningNumberRequest("ordering.OrderNoSeq", "ORD"), ct);
+                new RunningNumberRequest("ordering.\"OrderNoSeq\"", "ORD"), ct);
 
             var order = new Domain.Order(command.CustomerId, orderNo, command.ItemDescription, command.Price);
 

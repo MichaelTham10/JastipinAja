@@ -1,11 +1,13 @@
-﻿using JastipinAja.BuildingBlocks.Exceptions;
+﻿using JastipinAja.BuildingBlocks.Events;
+using JastipinAja.BuildingBlocks.Exceptions;
+using JastipinAja.Order.Contracts.IntegrationEvents;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace JastipinAja.Order.Domain
 {
-    internal sealed class Order
+    internal sealed class Order : EntityBase
     {
         public long Id { get; private set; }
         public Guid PublicId { get; private set; }
@@ -40,7 +42,10 @@ namespace JastipinAja.Order.Domain
         public void MarkAsPurchased() => Transition(OrderStatus.Purchased, OrderStatus.Paid);
         public void Ship() => Transition(OrderStatus.InTransit, OrderStatus.Purchased);
         public void MarkReadyForHandover() => Transition(OrderStatus.ReadyForHandover, OrderStatus.InTransit);
-        public void Complete() => Transition(OrderStatus.Completed, OrderStatus.ReadyForHandover);
+        public void Complete() {
+            Transition(OrderStatus.Completed, OrderStatus.ReadyForHandover);
+            AddDomainEvent(new OrderCompletedEvent(PublicId, Price));   // <- baris baru
+        }
 
         public void Cancel()  // jalur tanpa uang: belum dibayar
         {

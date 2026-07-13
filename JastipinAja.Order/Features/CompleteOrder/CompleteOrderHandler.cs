@@ -1,6 +1,8 @@
-﻿using JastipinAja.BuildingBlocks.Exceptions;
+﻿using JastipinAja.BuildingBlocks.Events;
+using JastipinAja.BuildingBlocks.Exceptions;
 using JastipinAja.Order.Features.MarkAsPaid;
 using JastipinAja.Order.Persistence;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,13 @@ namespace JastipinAja.Order.Features.CompleteOrder
     internal sealed class CompleteOrderHandler
     {
         private readonly OrderDbContext _db;
-        public CompleteOrderHandler(OrderDbContext db) => _db = db;
+        private readonly IPublisher _publisher;
+
+        public CompleteOrderHandler(OrderDbContext db, IPublisher publisher) 
+        {
+            _db = db;
+            _publisher = publisher;
+        }
 
         public async Task Handle(CompleteOrderCommand command, CancellationToken ct)
         {
@@ -21,6 +29,7 @@ namespace JastipinAja.Order.Features.CompleteOrder
 
             order.Complete();   // entity menolak kalau status bukan Accepted
             await _db.SaveChangesAsync(ct);
+            await _db.DispatchAndClearEvents(_publisher, ct); // baru publish SETELAH save sukses
         }
     }
 }

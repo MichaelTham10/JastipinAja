@@ -44,6 +44,7 @@ namespace JastipinAja.Order
             services.AddScoped<GetOrdersHandler>();
             services.AddScoped<MarkAsReadyForHandoverHandler>();
             services.AddValidatorsFromAssembly(typeof(OrderModuleServiceRegistrar).Assembly, includeInternalTypes: true);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OrderModuleServiceRegistrar).Assembly));
 
             return services;
         }

@@ -16,8 +16,8 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copy csproj & restore dependencies
-COPY ["JastipinAja.Web.csproj", "./"]
-RUN dotnet restore "JastipinAja.Web.csproj"
+COPY ["JastipinAja.Web/JastipinAja.Web.csproj", "JastipinAja.Web/"]
+RUN dotnet restore "JastipinAja.Web/JastipinAja.Web.csproj"
 
 # Copy all files & build
 COPY . .

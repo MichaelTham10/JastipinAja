@@ -16,6 +16,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\JastipinAja.BuildingBlocks\JastipinAja.BuildingBlocks.csproj" />
+		<ProjectReference Include="..\JastipinAja.Order.Contracts\JastipinAja.Order.Contracts.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

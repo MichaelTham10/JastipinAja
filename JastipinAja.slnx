@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="JastipinAja.ArchitectureTests/JastipinAja.ArchitectureTests.csproj" Id="32ed0948-443c-4946-9b55-5f30decb2c2c" />
   <Project Path="JastipinAja.BuildingBlocks/JastipinAja.BuildingBlocks.csproj" Id="9fe3d048-cd69-4970-a7d8-0c9d1a1a73e6" />
   <Project Path="JastipinAja.Order.Contracts/JastipinAja.Order.Contracts.csproj" />
   <Project Path="JastipinAja.Order.Tests/JastipinAja.Order.Tests.csproj" Id="6f673624-1cdc-4221-afda-c4adf8426fa8" />

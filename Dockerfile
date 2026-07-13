@@ -1,40 +1,18 @@
-# =========================
-# 1. Base runtime image
-# =========================
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
-WORKDIR /app
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
 
 # penting: bind ke semua IP
 ENV ASPNETCORE_URLS=http://+:80
 
 EXPOSE 80
 
-# =========================
-# 2. Build image
-# =========================
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
-WORKDIR /src
-
-# Copy csproj & restore dependencies
-COPY ["JastipinAja.Web/JastipinAja.Web.csproj", "JastipinAja.Web/"]
-RUN dotnet restore "JastipinAja.Web/JastipinAja.Web.csproj"
-
-# Copy all files & build
 COPY . .
-RUN dotnet build "JastipinAja.Web.csproj" -c Release -o /app/build
+RUN dotnet restore
+RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
-# =========================
-# 3. Publish
-# =========================
-FROM build AS publish
-RUN dotnet publish "JastipinAja.Web.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-# =========================
-# 4. Final image
-# =========================
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 
 ENTRYPOINT ["dotnet", "JastipinAja.Web.dll"]

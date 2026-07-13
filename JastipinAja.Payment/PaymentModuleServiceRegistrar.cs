@@ -41,7 +41,7 @@ namespace JastipinAja.Payment
 
         }
 
-        public static IEndpointRouteBuilder MapOrderModule(this IEndpointRouteBuilder app)
+        public static IEndpointRouteBuilder MapPaymentModule(this IEndpointRouteBuilder app)
         {
             app.MapOrderEndpoints();
             return app;

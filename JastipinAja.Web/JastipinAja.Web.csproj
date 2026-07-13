@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JastipinAja.Order\JastipinAja.Order.csproj" />
+    <ProjectReference Include="..\JastipinAja.Payment\JastipinAja.Payment.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 
 using JastipinAja.BuildingBlocks.Exceptions;
 using JastipinAja.Order;
+using JastipinAja.Payment;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddOrderModule(builder.Configuration);
+builder.Services.AddPaymentModule(builder.Configuration);
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
@@ -34,5 +36,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapOrderModule();
+
+app.MapPaymentModule();
 
 app.Run();
